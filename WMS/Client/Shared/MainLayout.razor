@@ -1,0 +1,57 @@
+﻿@inherits LayoutComponentBase
+
+<!--主页布局-->
+<div class="page">
+
+    <!--left-->
+    <div class="sidebar"
+         style="width:@SidebarValue;overflow:hidden;
+         background-image:linear-gradient(180deg, rgb(5, 39, 103) 0%, @Sidebarbackground 70%);">
+        <NavMenu />
+    </div>
+
+
+    <!--top-->
+    <main>
+        <div class="top-row px-4">
+
+            <Switch OnColor="Color.Danger"
+                    OffColor="Color.Success"
+                    ValueChanged="@OnSidebar"
+                    OnText="关闭菜单"
+                    OffText="开启菜单">
+            </Switch>
+
+            <Logout ImageUrl="@ImageUrl" DisplayName="@DisplayName" UserName="@UserName" />
+
+
+        </div>
+        <!--bottom-->
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+
+
+@code {
+    private string Sidebarbackground { get; set; } = "#0a1c3d";
+    private string SidebarValue { get; set; } = "auto";
+    private string ImageUrl { get; set; } = "https://himg.bdimg.com/sys/portrait/item/public.1.b437426.hQHWq0sslfR6yax6tc3Qhw.jpg";
+    private string DisplayName { get; set; }
+    private string UserName { get; set; }
+
+    //是否激活侧边菜单栏
+    private void OnSidebar(bool a)
+    {
+        if (a)
+        {
+            SidebarValue = "auto";
+        }
+        else
+        {
+            SidebarValue = "0px";
+        }
+    }
+
+}
